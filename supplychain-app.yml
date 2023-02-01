@@ -13,8 +13,7 @@ spec:
         name: kapp-git-ssh
   template:
   - ytt:
-      inline:
-        pathsFrom:
+      valuesFrom:
         - secretRef:
             name: supplychain-app-values
   deploy:

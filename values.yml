@@ -21,6 +21,8 @@ gitops:
   server_address: ssh://git@github.com 
   repository_owner: Mpluya
   repository_name: config-steeltoe
+  deliverable_repository_owner: Mpluya
+  deliverable_repository_name: deliverable-config-repo
   pull_request:
     server_kind:
     commit_branch: ""

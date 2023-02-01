@@ -31,12 +31,12 @@ spec:
 
   params:
     #@ if/end data.values.gitops.deliverable_repository_owner:
-    - name: gitops_deliverable_repository_owner
+    - name: deliverable_repository_owner
       default: #@ data.values.gitops.deliverable_repository_owner
     #@ if/end data.values.gitops.deliverable_repository_name:
-    - name: gitops_deliverable_repository_name
+    - name: deliverable_repository_name
       default: #@ data.values.gitops.deliverable_repository_name
-    - name: gitops_deliverable_branch
+    - name: deliverable_branch
       default: main
     - name: maven_repository_url
       value: #@ data.values.maven.repository.url
