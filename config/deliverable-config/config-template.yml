@@ -4,7 +4,7 @@
 apiVersion: carto.run/v1alpha1
 kind: ClusterConfigTemplate
 metadata:
-  name: external-deliverable-template
+  name: config-deliverable-template
   labels:
     app.tanzu.vmware.com/deliverable-type: web
 spec:
