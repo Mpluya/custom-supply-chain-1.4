@@ -17,7 +17,7 @@
 apiVersion: carto.run/v1alpha1
 kind: ClusterSupplyChain
 metadata:
-  name: source-test-scan-to-url
+  name: custom-source-test-scan-to-url
 spec:
   selectorMatchExpressions:
     - key: 'apps.tanzu.vmware.com/workload-type'
@@ -28,6 +28,7 @@ spec:
       #@ end
   selector:
     apps.tanzu.vmware.com/has-tests: "true"
+    custom: "true"
 
   params:
     #@ if/end data.values.gitops.deliverable_repository_owner:
