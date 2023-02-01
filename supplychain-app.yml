@@ -1,0 +1,21 @@
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: supplychain-app
+  namespace: tap-install
+spec:
+  serviceAccountName: tap-install-sa
+  fetch:
+  - git:
+      url: ssh://git@github.com/Mpluya/custom-supply-chain-1.4
+      ref: origin/main
+      secretRef: 
+        name: kapp-git-ssh
+  template:
+  - ytt:
+      inline:
+        pathsFrom:
+        - secretRef:
+            name: supplychain-app-values
+  deploy:
+  - kapp: {}
