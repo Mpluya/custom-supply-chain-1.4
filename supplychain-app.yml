@@ -11,8 +11,11 @@ spec:
       ref: origin/main
       secretRef: 
         name: kapp-git-ssh
+    path: config
   template:
   - ytt:
+      paths:
+      - config/
       valuesFrom:
         - secretRef:
             name: supplychain-app-values

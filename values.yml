@@ -1,4 +1,3 @@
-#@data/values
 ---
 registry:
   server: "375783000519.dkr.ecr.us-west-2.amazonaws.com"
@@ -15,10 +14,10 @@ gitops:
   branch: main
   username: supplychain
   email: supplychain
-  commit_message: supplychain@cluster.local
+  commit_message: "supplychain@cluster.local"
   ssh_secret: git-ssh
   commit_strategy: direct
-  server_address: ssh://git@github.com 
+  server_address: "ssh://git@github.com"
   repository_owner: Mpluya
   repository_name: config-steeltoe
   deliverable_repository_owner: Mpluya
