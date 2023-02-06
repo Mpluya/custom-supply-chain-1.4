@@ -4,11 +4,23 @@ metadata:
   annotations:
   name: sonarqube-template
 spec:
-  params:
-    - name: wait_on_sonar_analysis
-      default: {}
   revisionPath: .status.outputs.revision
   urlPath: .status.outputs.url
+
+  healthRule:
+    singleConditionType: Ready
+
+  params:
+    - name: sonar-host-url
+      default: "http://sonarqube.build.prep.tapsme.org"
+    - name: sonar-login
+      default: "sqa_10efa787f763c0946fd72e7e66647290634a7305"
+    - name: wait-on-sonar-analysis
+      default: "false"
+    
+    - name: testing_pipeline_matching_labels
+      default: 
+        apps.tanzu.vmware.com/pipeline: test
 
   ytt: |
     #@ load("@ytt:data", "data")
@@ -20,6 +32,27 @@ spec:
     #@   end
     #@   labels.update(fixed_values)
     #@   return labels
+    #@ end
+
+    #@ def merged_tekton_params():
+    #@   params = []
+    #@   if hasattr(data.values, "params") and hasattr(data.values.params, "testing_pipeline_params"):
+    #@     for param in data.values.params["testing_pipeline_params"]:
+    #@       params.append({ "name": param, "value": data.values.params["testing_pipeline_params"][param] })
+    #@     end
+    #@   end
+    #@   params.append({ "name": "source-url", "value": data.values.source.url })
+    #@   params.append({ "name": "source-revision", "value": data.values.source.revision })
+    #@   if hasattr(data.values.workload.spec, "serviceAccountName"):
+    #@     params.append({ "name": "serviceAccount", "value": data.values.workload.spec.serviceAccountName })
+    #@   else:
+    #@     params.append({ "name": "serviceAccount", "value": "default" })
+    #@   end
+    #@   params.append({ "name": "sonar-project-key", "value": data.values.workload.metadata.name })
+    #@   params.append({ "name": "wait-on-sonar-analysis", "value": data.values.params.wait-on-sonar-analysis })
+    #@   params.append({ "name": "sonar-host-url", "value": data.values.params.sonar-host-url })    
+    #@   params.append({ "name": "sonar-login", "value": data.values.params.sonar-login })
+    #@   return params
     #@ end
 
     apiVersion: carto.run/v1alpha1
@@ -44,14 +77,4 @@ spec:
           apps.tanzu.vmware.com/language: #@ data.values.workload.metadata.labels["apps.tanzu.vmware.com/language"]
           
       inputs:
-        source-url: #@ data.values.source.url
-        source-revision: #@ data.values.source.revision
-
-        #@ if hasattr(data.values.workload.spec, "serviceAccountName"):
-        serviceAccount: #@ data.values.workload.spec.serviceAccountName
-        #@ else:
-        serviceAccount: default
-        #@ end
-
-        sonar-project-key: #@ data.values.workload.metadata.name
-        wait_on_sonar_analysis: #@ data.values.params.wait_on_sonar_analysis
+        tekton-params: #@ merged_tekton_params()

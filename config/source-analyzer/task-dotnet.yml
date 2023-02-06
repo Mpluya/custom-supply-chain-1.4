@@ -32,13 +32,12 @@ spec:
       description: toggle to wait until sonarqube analysis is complete
 
   workspaces:
-    - name: maven-settings
     - name: supplychain-workspace
 
    
   steps:
     - name: pull-code
-      image: index.docker.io/tapsme/gradle@sha256:ba5d54bc93e3d7ae95481963c4cbd171100804a4fc64baf2ebabf0329c9e1179
+      image: gradle
       workingDir: $(workspaces.supplychain-workspace.path)
       script: |
         #!/usr/bin/env bash
@@ -46,7 +45,7 @@ spec:
         wget -qO- $(params.source-url) | tar xvz
 
     - name: sonar-scan
-      image: index.docker.io/tapsme/dotnetsonar@sha256:0122ff42df5e2121ad3100dfca309e2f9cdf06d545d6e031f3e70f332b871a18
+      image: dotnetsonar@sha256:0122ff42df5e2121ad3100dfca309e2f9cdf06d545d6e031f3e70f332b871a18
       workingDir: $(workspaces.supplychain-workspace.path)
       script: |
         #!/usr/bin/env bash
