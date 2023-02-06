@@ -100,6 +100,17 @@ spec:
     - resource: source-provider
       name: source
 
+  - name: source-analyzer
+    params:
+    - value: "false"
+      name: wait_on_sonar_analysis
+    templateRef:
+      kind: ClusterSourceTemplate
+      name: sonarqube-template
+    sources:
+    - resource: source-tester
+      name: source
+
   - name: source-scanner
     templateRef:
       kind: ClusterSourceTemplate
@@ -110,7 +121,7 @@ spec:
       - name: scanning_source_template
         default: #@ data.values.scanning.source.template
     sources:
-      - resource: source-tester
+      - resource: source-analyzer
         name: source
 
   - name: image-provider

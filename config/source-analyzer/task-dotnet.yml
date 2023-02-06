@@ -1,0 +1,54 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: sonarqube-scanner-dotnet
+  namespace: default
+  labels:
+    apps.tanzu.vmware.com/language: "dotnet"
+    apps.tanzu.vmware.com/sonarqube: "sonarqube"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/categories: Security
+    tekton.dev/tags: security
+    tekton.dev/displayName: "sonarqube scanner"
+    tekton.dev/platforms: "linux/amd64"
+spec:
+  params:
+    - name: sonar-host-url
+      description: Host URL where the sonarqube server is running
+      default: ""
+    - name: sonar-project-key
+      description: Project's unique key
+      default: ""
+    - name: sonar-login
+      description: Auth for the project
+      default: ""
+    - name: source-url
+      description: Location of the source code
+    - name: source-revision
+      description: i.e. git hash
+      default: ""
+    - name: wait-on-sonar-analysis
+      description: toggle to wait until sonarqube analysis is complete
+
+  workspaces:
+    - name: supplychain-workspace
+
+  steps:
+    - name: pull-code
+      image: gradle
+      workingDir: $(workspaces.supplychain-workspace.path)
+      script: |
+        #!/usr/bin/env bash
+        set -ex
+        wget -qO- $(params.source-url) | tar xvz
+
+    - name: sonar-scan
+      image: 375783000519.dkr.ecr.us-west-2.amazonaws.com/tanzu-application-platform/custom-supply-chain:latest
+      workingDir: $(workspaces.supplychain-workspace.path)
+      script: |
+        #!/usr/bin/env bash
+        set -ex
+        dotnet-sonarscanner begin /k:$(params.sonar-project-key) /d:sonar.host.url=$(params.sonar-host-url) /d:sonar.login=$(params.sonar-login)
+        dotnet build *.sln
+        dotnet-sonarscanner end /d:sonar.login=$(params.sonar-login)
