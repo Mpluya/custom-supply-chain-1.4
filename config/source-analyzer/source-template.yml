@@ -62,6 +62,9 @@ spec:
     spec:
       #@ if/end hasattr(data.values.workload.spec, "serviceAccountName"):
       serviceAccountName: #@ data.values.workload.spec.serviceAccountName
+      #@ else
+      serviceAccountName: default
+      #@ end
 
       runTemplateRef:
         name: tekton-sonarqube-taskrun
