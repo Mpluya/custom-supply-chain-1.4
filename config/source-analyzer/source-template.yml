@@ -11,11 +11,11 @@ spec:
     singleConditionType: Ready
 
   params:
-    - name: sonar-host-url
+    - name: sonar_host_url
       default: "http://sonarqube.build.prep.tapsme.org"
-    - name: sonar-login
+    - name: sonar_login
       default: "sqa_10efa787f763c0946fd72e7e66647290634a7305"
-    - name: wait-on-sonar-analysis
+    - name: wait_on_sonar_analysis
       default: ""
     - name: testing_pipeline_matching_labels
       default: 
@@ -48,9 +48,9 @@ spec:
     #@     params.append({ "name": "serviceAccount", "value": "default" })
     #@   end
     #@   params.append({ "name": "sonar-project-key", "value": data.values.workload.metadata.name })
-    #@   params.append({ "name": "wait-on-sonar-analysis", "value": data.values.params.wait-on-sonar-analysis })
-    #@   params.append({ "name": "sonar-host-url", "value": data.values.params.sonar-host-url })    
-    #@   params.append({ "name": "sonar-login", "value": data.values.params.sonar-login })
+    #@   params.append({ "name": "wait-on-sonar-analysis", "value": data.values.params.wait_on_sonar_analysis })
+    #@   params.append({ "name": "sonar-host-url", "value": data.values.params.sonar_host_url })    
+    #@   params.append({ "name": "sonar-login", "value": data.values.params.sonar_login })
     #@   return params
     #@ end
 
