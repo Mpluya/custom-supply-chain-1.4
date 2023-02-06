@@ -73,7 +73,6 @@ spec:
           kind: Task
         matchingLabels:
           apps.tanzu.vmware.com/sonarqube: "sonarqube"
-          apps.tanzu.vmware.com/language: #@ data.values.workload.metadata.labels["apps.tanzu.vmware.com/language"]
           
       inputs:
         tekton-params: #@ merged_tekton_params()
