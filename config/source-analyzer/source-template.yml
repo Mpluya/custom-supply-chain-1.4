@@ -60,7 +60,7 @@ spec:
       name: #@ data.values.workload.metadata.name + "-code-analysis"
       labels: #@ merge_labels({ "app.kubernetes.io/component": "test" })
     spec:
-      #@ if/end hasattr(data.values.workload.spec, "serviceAccountName"):
+      #@ if hasattr(data.values.workload.spec, "serviceAccountName"):
       serviceAccountName: #@ data.values.workload.spec.serviceAccountName
       #@ else:
       serviceAccountName: default
