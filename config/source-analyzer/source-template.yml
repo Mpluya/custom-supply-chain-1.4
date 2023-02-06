@@ -15,9 +15,7 @@ spec:
       default: "http://sonarqube.build.prep.tapsme.org"
     - name: sonar-login
       default: "sqa_10efa787f763c0946fd72e7e66647290634a7305"
-    - name: wait-on-sonar-analysis
-      default: "false"
-    
+    - name: wait-on-sonar-analysis    
     - name: testing_pipeline_matching_labels
       default: 
         apps.tanzu.vmware.com/pipeline: test
