@@ -42,11 +42,6 @@ spec:
     #@   end
     #@   params.append({ "name": "source-url", "value": data.values.source.url })
     #@   params.append({ "name": "source-revision", "value": data.values.source.revision })
-    #@   if hasattr(data.values.workload.spec, "serviceAccountName"):
-    #@     params.append({ "name": "serviceAccount", "value": data.values.workload.spec.serviceAccountName })
-    #@   else:
-    #@     params.append({ "name": "serviceAccount", "value": "default" })
-    #@   end
     #@   params.append({ "name": "sonar-project-key", "value": data.values.workload.metadata.name })
     #@   params.append({ "name": "wait-on-sonar-analysis", "value": data.values.params.wait_on_sonar_analysis })
     #@   params.append({ "name": "sonar-host-url", "value": data.values.params.sonar_host_url })    
@@ -78,4 +73,10 @@ spec:
           apps.tanzu.vmware.com/sonarqube: "sonarqube"
           
       inputs:
+        #@ if hasattr(data.values.workload.spec, "serviceAccountName"):
+        serviceAccountName: #@ data.values.workload.spec.serviceAccountName
+        #@ else:
+        serviceAccountName: default
+        #@ end
+
         tekton-params: #@ merged_tekton_params()
