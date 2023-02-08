@@ -48,3 +48,7 @@ supported_workloads:
   cluster_config_template_name: server-template
 - type: worker
   cluster_config_template_name: worker-template
+
+sonar:
+  url: "http://sonarqube.build.prep.tapsme.org"
+  token: ""

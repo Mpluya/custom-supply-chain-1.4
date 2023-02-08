@@ -12,9 +12,9 @@ spec:
 
   params:
     - name: sonar_host_url
-      default: "http://sonarqube.build.prep.tapsme.org"
-    - name: sonar_login
-      default: "sqa_10efa787f763c0946fd72e7e66647290634a7305"
+      default: ""
+    - name: sonar_token
+      default: ""
     - name: wait_on_sonar_analysis
       default: ""
     - name: testing_pipeline_matching_labels
@@ -45,7 +45,7 @@ spec:
     #@   params.append({ "name": "sonar-project-key", "value": data.values.workload.metadata.name })
     #@   params.append({ "name": "wait-on-sonar-analysis", "value": data.values.params.wait_on_sonar_analysis })
     #@   params.append({ "name": "sonar-host-url", "value": data.values.params.sonar_host_url })    
-    #@   params.append({ "name": "sonar-login", "value": data.values.params.sonar_login })
+    #@   params.append({ "name": "sonar-login", "value": data.values.params.sonar_token })
     #@   return params
     #@ end
 
@@ -76,7 +76,7 @@ spec:
         #@ if hasattr(data.values.workload.spec, "serviceAccountName"):
         serviceAccountName: #@ data.values.workload.spec.serviceAccountName
         #@ else:
-        serviceAccountName: default
+        serviceAccount: default
         #@ end
 
         tekton-params: #@ merged_tekton_params()
