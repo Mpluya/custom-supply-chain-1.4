@@ -76,7 +76,7 @@ spec:
         #@ if hasattr(data.values.workload.spec, "serviceAccountName"):
         serviceAccountName: #@ data.values.workload.spec.serviceAccountName
         #@ else:
-        serviceAccount: default
+        serviceAccountName: default
         #@ end
 
         tekton-params: #@ merged_tekton_params()

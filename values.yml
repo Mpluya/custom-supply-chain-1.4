@@ -51,4 +51,4 @@ supported_workloads:
 
 sonar:
   url: "http://sonarqube.build.prep.tapsme.org"
-  token: ""
+  token: "sqa_10efa787f763c0946fd72e7e66647290634a7305"
