@@ -32,7 +32,7 @@ spec:
   params:
     #@ if/end data.values.sonar.url:
     - name: sonar_host_url
-      default: #@ data.values.sonar.token
+      default: #@ data.values.sonar.url
     #@ if/end data.values.sonar.token:
     - name: sonar_token
       default: #@ data.values.sonar.token
