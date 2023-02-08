@@ -14,7 +14,7 @@ spec:
     apiVersion: tekton.dev/v1beta1
     kind: TaskRun
     metadata:
-      generateName: code-analysis-$(runnable.metadata.name)$-
+      generateName: $(runnable.metadata.name)$-
       labels: $(runnable.metadata.labels)$
     spec:
       serviceAccountName: $(runnable.spec.inputs.serviceAccountName)$
