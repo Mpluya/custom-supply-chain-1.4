@@ -45,7 +45,7 @@ spec:
     #@   params.append({ "name": "sonar-project-key", "value": data.values.workload.metadata.name })
     #@   params.append({ "name": "wait-on-sonar-analysis", "value": data.values.params.wait_on_sonar_analysis })
     #@   params.append({ "name": "sonar-host-url", "value": data.values.params.sonar_host_url })    
-    #@   params.append({ "name": "sonar-login", "value": data.values.params.sonar_token })
+    #@   params.append({ "name": "sonar-token", "value": data.values.params.sonar_token })
     #@   return params
     #@ end
 
