@@ -108,7 +108,7 @@ spec:
 
   - name: source-analyzer
     params:
-    - value: "false"
+    - value: #@ data.values.sonar.wait
       name: wait_on_sonar_analysis
     templateRef:
       kind: ClusterSourceTemplate
