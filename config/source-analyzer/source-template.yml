@@ -69,8 +69,10 @@ spec:
         resource:
           apiVersion: tekton.dev/v1beta1
           kind: Task
-        matchingLabels:
-          apps.tanzu.vmware.com/sonarqube: "sonarqube"
+          
+        #@ not hasattr(data.values, "testing_pipeline_matching_labels") or fail("testing_pipeline_matching_labels param is required")
+        matchingLabels: #@ data.values.params["testing_pipeline_matching_labels"] or fail("testing_pipeline_matching_labels param cannot be empty")
+
           
       inputs:
         #@ if hasattr(data.values.workload.spec, "serviceAccountName"):
