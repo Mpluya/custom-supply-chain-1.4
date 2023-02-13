@@ -33,8 +33,6 @@ spec:
     #@ if/end data.values.sonar.url:
     - name: sonar_host_url
       default: #@ data.values.sonar.url
-    - name: sonar_token
-      default: ""
     #@ if/end data.values.gitops.deliverable_repository_owner:
     - name: deliverable_repository_owner
       default: #@ data.values.gitops.deliverable_repository_owner

@@ -13,8 +13,6 @@ spec:
   params:
     - name: sonar_host_url
       default: ""
-    - name: sonar_token
-      default: ""
     - name: wait_on_sonar_analysis
       default: ""
     - name: testing_pipeline_matching_labels
