@@ -28,7 +28,8 @@ spec:
       #@ end
   selector:
     apps.tanzu.vmware.com/has-tests: "true"
-
+    no-sonar: "true"
+    
   params:
     #@ if/end data.values.sonar.url:
     - name: sonar_host_url
