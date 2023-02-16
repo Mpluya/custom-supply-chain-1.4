@@ -17,7 +17,7 @@
 apiVersion: carto.run/v1alpha1
 kind: ClusterSupplyChain
 metadata:
-  name: source-test-scan-to-url
+  name: source-test-skipsonar-scan-to-url
 spec:
   selectorMatchExpressions:
     - key: 'apps.tanzu.vmware.com/workload-type'
