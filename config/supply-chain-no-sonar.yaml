@@ -113,7 +113,7 @@ spec:
       - name: scanning_source_template
         default: #@ data.values.scanning.source.template
     sources:
-      - resource: source-analyzer
+      - resource: source-tester
         name: source
 
   - name: image-provider
