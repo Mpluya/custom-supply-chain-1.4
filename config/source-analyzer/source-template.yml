@@ -31,6 +31,13 @@ spec:
     #@   return labels
     #@ end
 
+    #@ def sonar_project_key():
+    #@   return "-".join([
+    #@    data.values.workload.metadata.namespace,
+    #@    data.values.workload.metadata.name,
+    #@   ])
+    #@ end
+
     #@ def merged_tekton_params():
     #@   params = []
     #@   if hasattr(data.values, "params") and hasattr(data.values.params, "testing_pipeline_params"):
@@ -40,7 +47,7 @@ spec:
     #@   end
     #@   params.append({ "name": "source-url", "value": data.values.source.url })
     #@   params.append({ "name": "source-revision", "value": data.values.source.revision })
-    #@   params.append({ "name": "sonar-project-key", "value": data.values.workload.metadata.name })
+    #@   params.append({ "name": "sonar-project-key", "value": sonar_project_key() })
     #@   params.append({ "name": "wait-on-sonar-analysis", "value": data.values.params.wait_on_sonar_analysis })
     #@   params.append({ "name": "sonar-host-url", "value": data.values.params.sonar_host_url })    
     #@   return params
